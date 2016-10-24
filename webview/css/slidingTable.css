@@ -1,6 +1,4 @@
 body{
-	margin: 0;
-	padding: 0;
     padding-top: 3.6rem;
 }
 .header{
@@ -11,6 +9,7 @@ body{
     height: 3.6rem;
     line-height: 3.6rem;
     background: #121417;
+    z-index: 100;
 }
 .goBack{
     display: block;
@@ -186,6 +185,7 @@ body{
     width: 90%;
     margin-left: 10%;
     background: #121417;
+    z-index: 101;
 }
 .condition ul{
 }
@@ -248,6 +248,7 @@ body{
     bottom: 0;
     height: 3.6rem;
     background: #121417;
+    z-index: 102;
 }
 .foot_btn a{
     display: block;
