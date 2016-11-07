@@ -3,20 +3,32 @@
  */
 var tableW = $(".table_container").css("width");
 var fontS = $("html").css("font-size").replace("px","")-0;
-var screenH = $(window).height() - fontS*3.6;
+var screenH = "";
+var pageIndex = 1;
+var flag1 = true;
 $(function(){
-
+    //下滑刷新调用
+    k_touch("content", "y");
+    if($("body div").hasClass("tabbtn")){
+        screenH = $(window).height() - fontS*7.6-5;
+    }else{
+        screenH = $(window).height() - fontS*3.6;
+    }
+    var conditionH = $(window).height() - fontS*3.6-$(".foot_btn").height();
+    $(".condition").css("min-height",conditionH);
     FixTable("MyTable", 1, tableW, screenH);
+
     $(".rank").click(function(){
-        var type = $(this).index();
+        var index = $(this).index();
+        var type = $(this).attr("datatype");
         var that = $(this).find("i");
         console.log(type);
         if(that.hasClass("icon_top")){
             that.removeClass("icon_top").addClass("icon_low");
-            rank(type,0);
+            rank(index,type,0);
         }else{
             that.removeClass("icon_low").addClass("icon_top");
-            rank(type,1);
+            rank(index,type,1);
         }
     });
     $(".screening").click(function(){
@@ -129,9 +141,9 @@ function FixTable(TableID, FixColumnNumber, width, height) {
      $("#" + TableID + "_tableData").scrollTop($("#" + TableID + "_tableColumn").scrollTop());
      });*/
     $("#" + TableID + "_tableFix").css({ "overflow": "hidden", "position": "relative", "z-index": "50"});
-    $("#" + TableID + "_tableHead").css({ "overflow": "hidden", "width": width, "position": "relative", "z-index": "45"});
+    $("#" + TableID + "_tableHead").css({ "overflow": "hidden", "min-width": "100%", "width": width, "position": "relative", "z-index": "45"});
     $("#" + TableID + "_tableColumn").css({ "overflow": "hidden", "height": height, "position": "relative", "z-index": "40"});
-    $("#" + TableID + "_tableData").css({ "overflow": "scroll", "width": width, "height": height, "position": "relative", "z-index": "35" });
+    $("#" + TableID + "_tableData").css({ "overflow": "scroll", "min-width": "100%", "width": width, "height": height, "position": "relative", "z-index": "35" });
     if ($("#" + TableID + "_tableHead").width() > $("#" + TableID + "_tableFix table").width()) {
         $("#" + TableID + "_tableHead").css("width", $("#" + TableID + "_tableFix table").width());
         $("#" + TableID + "_tableData").css("width", $("#" + TableID + "_tableFix table").width());
@@ -151,7 +163,7 @@ function FixTable(TableID, FixColumnNumber, width, height) {
 var arrList = new Array();
 
 //list 排序
-function rank(type,data){
+function rank(index,type,data){
     var list = $("#MyTable tbody tr");
     var length = list.length;
     var arr = [];
@@ -160,13 +172,11 @@ function rank(type,data){
     for(i=0;i<length;i++){
         arrList[i] = list.eq(i);
         if(type == 1){  //1：方向 2：金额 3：利率 4：发布时间
-            arr[i] = list.eq(i).find("td").eq(type).attr("data")-0;
+            arr[i] = list.eq(i).find("td").eq(index).attr("data")-0;
+        }else if(type == 2){
+            arr[i] = list.eq(i).find("td").eq(index).html()-0;
         }else if(type == 3){
-            arr[i] = list.eq(i).find("td").eq(type).html()-0;
-        }else if(type == 4){
-            arr[i] = list.eq(i).find("td").eq(type).html().replace(/%/,"")-0;
-        }else if(type == 6){
-            arr[i] = timeCount(list.eq(i).find("td").eq(type).html());
+            arr[i] = list.eq(i).find("td").eq(index).html().replace(/%/,"")-0;
         }
     }
     if(data == 1){ //升序
@@ -203,20 +213,137 @@ function rank(type,data){
     var top = $("#MyTable_tableData").scrollTop();
     $("#MyTable tbody").html("").append(arrList);
     if(data==1){
-        $("#MyTable th").eq(type).find("i").removeClass("icon_low").addClass("icon_top");
+        $("#MyTable th").eq(index).find("i").removeClass("icon_low").addClass("icon_top");
     }else{
-        $("#MyTable th").eq(type).find("i").removeClass("icon_top").addClass("icon_low");
+        $("#MyTable th").eq(index).find("i").removeClass("icon_top").addClass("icon_low");
     }
     FixTable("MyTable", 1, tableW, screenH);
     $("#MyTable_tableData").scrollLeft(left);
-    $(MyTable_tableData).scrollTop(top);
+    $("#MyTable_tableData").scrollTop(top);
 
 }
 
+/* //时间转换
 function timeCount(str){
     var arr = str.split(":");
     var length = arr.length;
     var time;
     time = 3600*arr[0]+60*arr[1];
     return time
+}
+*/
+
+
+
+//滚动到底时加载数据
+function goNextPage(){
+    console.log("加载");
+    $(window).scroll(function(){
+        var o = $("body");
+        if(o!=null && o.length !=0){
+            //获取网页的完整高度(fix)
+            var height= $(document).height();
+            //获取浏览器高度(fix)
+            var clientHeight =$(window).height();
+
+            //获取网页滚过的高度(dynamic)
+            var top= window.pageYOffset || (document.compatMode == 'CSS1Compat' ? document.documentElement.scrollTop :	document.body.scrollTop);
+
+            //当 top+clientHeight = scrollHeight的时候就说明到底儿了
+            if((height > clientHeight)&&(top>=(parseInt(height)-clientHeight))){
+//				alert("go to next page");
+                console.log(pageIndex);
+                var sum = (pageIndex)*10;//第loadNum页，每页10条，应该共加载sum条
+                var length = $("#words_list ul li").length;
+                var args = new getArgs();
+                var circleId = args.circleId;
+                var token = args.token;
+                var terminal = args.terminal;
+                var version = args.version;
+                if(length<sum){
+
+                }else {
+                    pageIndex++;//刷新跳页
+                }
+            }
+        }
+    })
+}
+
+//第一步：下拉过程
+function slideDownStep1(dist) { // dist 下滑的距离，用以拉长背景模拟拉伸效果
+    var slideDown1 = document.getElementById("slideDown1"),
+        slideDown2 = document.getElementById("slideDown2");
+    slideDown2.style.display = "none";
+    slideDown1.style.display = "block";
+    slideDown1.style.height = (parseInt("50px") - dist) + "px";
+}
+//第二步：下拉，然后松开，
+function slideDownStep2() {
+    var slideDown1 = document.getElementById("slideDown1"),
+        slideDown2 = document.getElementById("slideDown2");
+    slideDown1.style.display = "none";
+    slideDown1.style.height = "50px";
+    slideDown2.style.display = "block";
+    //刷新数据
+    //location.reload();
+}
+//第三步：刷新完成，回归之前状态
+function slideDownStep3() {
+    var slideDown1 = document.getElementById("slideDown1"),
+        slideDown2 = document.getElementById("slideDown2");
+    slideDown1.style.display = "none";
+    slideDown2.style.display = "none";
+    flag1 = true;
+}
+
+//contentId表示对其进行事件绑定，way==>x表示水平方向的操作，y表示竖直方向的操作
+function k_touch(contentId, way) {
+    var _start = 0,
+        _end = 0,
+        _content = document.getElementById(contentId);
+    _content.addEventListener("touchstart", touchStart, false);
+    _content.addEventListener("touchmove", touchMove, false);
+    _content.addEventListener("touchend", touchEnd, false);
+    function touchStart(event) {
+        //var touch = event.touches[0]; //这种获取也可以，但已不推荐使用
+        var touch = event.targetTouches[0];
+        if(way == "y") {
+            _start = touch.pageY;
+        }/* else {
+            _start = touch.pageX;
+        }*/
+    }
+
+    function touchMove(event) {
+        var scrollT = $("#MyTable_tableData").scrollTop();
+        if(scrollT<=0){
+            var touch = event.targetTouches[0];
+            if(way == "y") {
+                _end = (_start - touch.pageY);
+                //下滑才执行操作
+                if(_end < 0) {
+                    slideDownStep1(_end);
+                }
+
+            }/* else {
+             _end = (_start - touch.pageX);
+             }*/
+        }
+    }
+
+    function touchEnd(event) {
+        if(_end > 23) {
+            console.log("左滑或上滑  " + _end);
+            goNextPage();
+        } else if(_end < 0){
+            console.log("右滑或下滑" + _end);
+            slideDownStep2();
+            //刷新成功则
+            //模拟刷新成功进入第三步
+            setTimeout(function() {
+                slideDownStep3();
+            }, 1000);
+        }
+    }
 }
