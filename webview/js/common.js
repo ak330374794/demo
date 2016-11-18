@@ -2,6 +2,7 @@
  * Created by ankang on 2016/9/20.
  */
 $(function(){
+    $("a[title='站长统计']").hide();
     var headerH = $(".header").height();
     //$("body").css("padding-top",headerH);
     orient();
