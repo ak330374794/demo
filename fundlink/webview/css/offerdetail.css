@@ -1,0 +1,81 @@
+html{
+    background: #f9f9f9;
+}
+body {
+    padding-top: 3.6rem;
+}
+.goBack{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    float: left;
+    width: 3.2rem;
+    height: 3.6rem;
+    cursor: pointer;
+}
+.icon_back{
+    display: block;
+    width: 3.2rem;
+    height: 3.6rem;
+    background: url("../images/icon_back.png") 50% no-repeat;
+    background-size: 1.2rem 2rem;
+    z-index: 101;
+}
+.infolist{
+    background: #f9f9f9;
+    border-top: 1px solid #f3f3f3;
+}
+.infolist ul{
+    margin-top: .8rem;
+    background: #fff;
+}
+.infolist li{
+    position: relative;
+    padding: 1rem 1.4rem;
+    /*height: 3.2rem;
+    line-height: 3.2rem;*/
+    border-bottom: 1px solid #f3f3f3;
+}
+.infolist li span{
+    display: inline-block;
+    font-size: 1.12rem;
+    color: #333;;
+    vertical-align: middle;
+}
+.info_left{
+    width: 28%;
+    color: #353535;
+}
+.infolist li .info_right{
+    display: inline-block;
+    width: 72%;
+    text-align: left;
+    color: #808080;
+}
+.username{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.icon_im, .icon_qq, .icon_call, .icon_phone{
+    position: absolute;
+    display: block;
+    top: 1rem;
+    right: 2rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    cursor: pointer;
+}
+.icon_im{
+    background: url("../images/icon_im.png") no-repeat;
+    background-size: 1.6rem 1.6rem;
+}
+.icon_qq{
+    background: url("../images/icon_qq.png") no-repeat;
+    background-size: 1.6rem 1.6rem;
+}
+.icon_call, .icon_phone{
+    background: url("../images/icon_phone.png") no-repeat;
+    background-size: 1.6rem 1.6rem;
+}

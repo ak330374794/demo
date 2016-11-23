@@ -1,0 +1,114 @@
+body{
+    background: #fff;
+}
+.header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3.6rem;
+    color: #000;
+    background: #f9f9f9;
+    border-bottom: 1px solid #e7e7e7;
+    z-index: 100;
+}
+
+.header h2 {
+    width: 100%;
+    font-size: 1.3rem;
+    line-height: 3.6rem;
+    text-align: center;
+}
+.cancel{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: .8rem;
+    color: #000;
+    line-height: 3.6rem;
+}
+.send{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: .8rem;
+    color: #3388dd;
+    line-height: 3.6rem;
+}
+/*.main_container{
+    margin-top: 3.6rem;
+}*/
+.message_box{
+    width: 100%;
+    overflow: auto;
+}
+.reply{
+    float: left;
+    display: inline-block;
+    width: 96%;
+    padding: .6rem 2%;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 6px;
+    word-wrap: break-word;
+    word-break:break-all;
+    resize : none;
+}
+.reply_btn{
+    display: none;
+    width: 100%;
+    height: 3.6rem;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.add_photo{
+    display: none;
+    clear: both;
+    padding: 1rem 1.2rem 0;
+}
+.add_photo ul{
+    overflow: auto;
+}
+.add_photo li{
+    position: relative;
+    float: left;
+    width: 23%;
+    margin: 0 1% .6rem;
+}
+.add_photo li .icon_del{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 25%;
+    background: url("../images/icon_del.png") no-repeat;
+    background-size: 100%;
+    z-index: 10;
+    cursor: pointer;
+}
+.add_photo li img{
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+.photo{
+    position: relative;
+    margin: 0 1% .6rem;
+    width: 23%;
+    background: url(../images/addphoto.jpg) no-repeat;
+    background-size: 100%;
+}
+.pic{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+input[type="file"] {
+    align-items: baseline;
+    color: inherit;
+    text-align: start;
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>非标</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!--根据屏幕全局显示-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--允许全屏模式浏览-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!--指定的iphone中safari顶端的状态条的样式;隐藏状态栏-->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!--指定的iphone中safari顶端的状态条的样式-->
+    <meta name="format-detection" content="email=no" />
+    <!--去除Android平台中对邮箱地址的识别-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 隐藏地址栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="" />
+    <!-- 状态条风格 -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/onlineMoney.css">
+    <script>
+        var globalWidth = window.innerWidth;
+        var radixNO = 25/750*globalWidth;
+        if(globalWidth<400){
+            globalWidth = 375;
+            radixNO = 12.5;
+        }
+        var fitStyle = "<style>html{font-size:" + radixNO + "px;}</style>";
+        document.write(fitStyle);
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var globalWidth = window.innerWidth;// for judge the screen ??
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        docEl.style.fontSize = 25 * (clientWidth / 750) + 'px';
+                        if(clientWidth<400){
+                            docEl.style.fontSize = 12.5 + 'px';
+                        }
+                    };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+</head>
+<body>
+<div class="header">
+    <a class="goBack" href="http://10.0.0.0" onclick="window.demo.goback()"><i class="icon_back"></i></a>
+    <h2>非标</h2>
+    <a class="screening" data="0" href="javascript:void(0)">筛选<i class="icon_screening"></i></a>
+</div>
+<div class="content" id="content">
+    <div id="slideDown">
+        <div id="slideDown1">
+            <p>松开刷新</p>
+        </div>
+        <div id="slideDown2">
+            <p>正在刷新 ...</p>
+        </div>
+    </div>
+    <div class="table_container">
+        <table id="MyTable" border="0" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>询价来源</th>
+                    <th class="rank" datatype="1">方向<i class="icon_top"></i></th>
+                    <th>产品</th>
+                    <th>具体内容</th>
+                    <th>发布时间</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form_screening">
+    <div class="condition">
+        <ul>
+            <li datatype="1" data="direction">
+                <div class="form_t">方向</div>
+                <div>
+                    <a class="form_btn blue_bg" data="">全部</a>
+                    <a class="form_btn" data="1">融入</a>
+                    <a class="form_btn" data="0">融出</a>
+                </div>
+            </li>
+            <li data="type">
+                <div class="form_t">产品</div>
+                <div>
+                    <a class="form_btn blue_bg" data="">全部</a>
+                    <a class="form_btn" data="福费延">福费延</a>
+                    <a class="form_btn" data="收益权">收益权</a>
+                    <a class="form_btn" data="国内信用证">国内信用证</a>
+                    <a class="form_btn" data="结构化业务">结构化业务</a>
+                    <a class="form_btn" data="质押业务">质押业务</a>
+                    <a class="form_btn" data="资管计划">资管计划</a>
+                    <a class="form_btn" data="兜底业务">兜底业务</a>
+                    <a class="form_btn" data="信托计划">信托计划</a>
+                </div>
+            </li>
+        </ul>
+        <div class="foot_btn">
+            <a id="reset" class="reset" href="javascript:void(0)">重置</a>
+            <a id="confirm" class="confirm" href="javascript:void(0)">确定</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/jquery/jquery.cookie.js"></script>
+<script src="js/common.js"></script>
+<script src="js/onlineMoney.js"></script>
+</html>

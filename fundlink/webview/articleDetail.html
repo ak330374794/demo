@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文章详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!--根据屏幕全局显示-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--允许全屏模式浏览-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!--指定的iphone中safari顶端的状态条的样式;隐藏状态栏-->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!--指定的iphone中safari顶端的状态条的样式-->
+    <meta name="format-detection" content="email=no" />
+    <!--去除Android平台中对邮箱地址的识别-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 隐藏地址栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="" />
+    <!-- 状态条风格 -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/articledetail.css">
+    <script>
+        var globalWidth = window.innerWidth;
+        var radixNO = 25/750*globalWidth;
+        if(globalWidth<400){
+            globalWidth = 375;
+            radixNO = 12.5;
+        }
+        var fitStyle = "<style>html{font-size:" + radixNO + "px;}</style>";
+        document.write(fitStyle);
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var globalWidth = window.innerWidth;// for judge the screen ??
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        docEl.style.fontSize = 25 * (clientWidth / 750) + 'px';
+                        if(clientWidth<400){
+                            docEl.style.fontSize = 12.5 + 'px';
+                        }
+                    };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+</head>
+<body>
+    <div class="download">
+        <i class="icon_close"></i>
+        <img class="logo" src="images/icon_logo.png">
+        <div class="appname">
+            <span>蓝石</span>
+            <span class="huise">汇聚金融行业精英</span>
+        </div>
+        <a id="download" href="javascript:void(0)">下载</a>
+    </div>
+    <img class="container_bg" src="images/container_bg.png" alt="" >
+    <div class="head_container">
+        <div class="cus_info">
+            <img class="head_img" src="images/defaulthead.png" alt="" >
+            <div><span id="username" class="username"></span><span class="time"></span></div>
+        </div>
+    </div>
+    <div class="main_container">
+        <div class="content">
+            <h2>标题</h2>
+            <div class="lable"></div>
+            <div class="content_text"></div>
+        </div>
+        <div class="comment">
+            <div class="hot_words">热门评论</div>
+            <div id="words_list" class="words_list">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="foot_box">
+                <div class="icon icon_reply">
+                    <img src="images/icon_reply.png" alt="" ><span class="commentSize">评论(0)</span>
+                </div>
+                <div class="icon icon_zan" data="0">
+                    <span class="add1">+1</span>
+                    <img class="zan_img" src="images/icon_zan.png" alt="" ><span class="likeSize">赞(0)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/jquery/jquery.cookie.js"></script>
+<script src="js/common.js"></script>
+<script src="js/articledetail.js"></script>
+</html>
