@@ -1,0 +1,11 @@
+{
+  "imglist": [
+    {
+      "imgs": "../src/assets/img/test1.jpg"
+    }, {
+      "imgs": "../src/assets/img/test2.jpg"
+    }, {
+      "imgs": "../src/assets/img/test3.jpg"
+    }
+  ]
+}
